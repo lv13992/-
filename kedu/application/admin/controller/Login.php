@@ -21,6 +21,7 @@ class Login extends Controller {
      * 登入
      */
     public function index() {
+        //dump(request()->ip());exit;
 
 
         if (isset($_POST['dosubmit'])) {
@@ -58,7 +59,7 @@ class Login extends Controller {
                 $model = new AdminUser();
                 $data = [
                     'last_login'=>time(),
-                    'last_ip'=>request()->ip()
+                    'last_ip'=>request()->ip(),
                 ];
                 $mod = ['id'=>$info['id']];
                 $model->save($data,$mod);
@@ -81,6 +82,7 @@ class Login extends Controller {
                 }
             }
 
+            $this->view->engine->layout(false);
             return $this->fetch('login');
         }
     }
@@ -102,4 +104,5 @@ class Login extends Controller {
         cookie('user_salt', null);
         $this->success('退出成功', 'login/index');
     }
+
 }

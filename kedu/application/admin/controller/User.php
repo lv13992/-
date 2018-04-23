@@ -132,7 +132,7 @@ class User extends Base
             //查出用户表中所有等级
             $grade=Db::name('user_grade')->select();
 
-            return $this->fetch('save', ['message' => Session::get('message'),'city'=>$city,'area'=>$area,'province'=>$province,'grade'=>$grade]);
+            return $this->fetch('save', ['message' => Session::get('message'),'city'=>$city,'area'=>$area,'province'=>$province,'grade'=>$grade,'data'=>$data]);
 
         } elseif ($request->isPost()) {
 

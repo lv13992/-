@@ -1,0 +1,75 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" role="form" action="{:url('add')}" method="post" name="myfrom" >
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品分类名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="col-xs-10 col-sm-5"  name="cat_name" placeholder="商品分类"/>
+                    </div>
+                </div>
+                {if condition="isset($message['cat_name'])"}
+                <label for="input-cat_name" class="text-danger">{$message['cat_name']}</label>
+                {/if}
+                <div class="space-4"></div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 商品描述</label>
+
+                    <div class="col-sm-9">
+                        <textarea name="cat_desc" placeholder="商品描述" class="col-xs-10 col-sm-5" cols="10" rows="8"></textarea>
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <span class="middle"></span>
+                        </span>
+                    </div>
+                </div>
+                {if condition="isset($message['cat_desc'])"}
+                <label for="input-cat_desc" class="text-danger">{$message['cat_desc']}</label>
+                {/if}
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 是否在导航栏展示</label>
+                    <label class="col-sm-3 control-label no-padding-right">
+                    <input type="radio" name="show_in_nav"  value="0" checked/>否
+                        <input type="radio" name="show_in_nav"   value="1"/>是
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 是否在前台页面展示</label>
+                    <label class="col-sm-3 control-label no-padding-right">
+                    <input type="radio" name="is_show"   value="0" checked/>否
+                    <input type="radio" name="is_show"   value="1"/>是</label>
+                </div>
+                <div class="space-4"></div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            提交
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+{/block}

@@ -9,25 +9,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
         <!-- bootstrap & fontawesome -->
-        <link href="__STATIC__/admin/ace1.4/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="__STATIC__/admin/ace1.4/assets/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
         <!-- page specific plugin styles -->
 
         <!-- text fonts -->
-        <link href="__STATIC__/admin/ace1.4/assets/css/fonts.googleapis.com.css" rel="stylesheet" />
+        <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/fonts.googleapis.com.css" />
 
         <!-- ace styles -->
-        <link href="__STATIC__/admin/ace1.4/assets/css/ace.min.css" rel="stylesheet" class="ace-main-stylesheet" id="main-ace-style" />
+        <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
         <!--[if lte IE 9]>
-                <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/ace-part2.min.css" rel="stylesheet" class="ace-main-stylesheet" />
+                <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
         <![endif]-->
-        <link href="__STATIC__/admin/ace1.4/assets/css/ace-skins.min.css" rel="stylesheet" />
-        <link href="__STATIC__/admin/ace1.4/assets/css/ace-rtl.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/ace-skins.min.css" />
+        <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/ace-rtl.min.css" />
 
         <!--[if lte IE 9]>
-          <link href="__STATIC__/admin/ace1.4/assets/css/ace-ie.min.css" rel="stylesheet" />
+          <link rel="stylesheet" href="__STATIC__/admin/ace1.4/assets/css/ace-ie.min.css" />
         <![endif]-->
 
         <!-- inline styles related to this page -->
@@ -41,7 +41,7 @@
         <script src="__STATIC__/admin/ace1.4/assets/js/html5shiv.min.js"></script>
         <script src="__STATIC__/admin/ace1.4/assets/js/respond.min.js"></script>
         <![endif]-->
-        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     </head>
 
     <body class="no-skin">
@@ -68,7 +68,7 @@
 
                 <div class="navbar-buttons navbar-header pull-right" role="navigation">
                     <ul class="nav ace-nav">
-
+                   
 
                         <li class="light-blue dropdown-modal">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -111,7 +111,7 @@
             </script>
 
             <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-                {include file='template/menu'/}
+                {include file='menu/menu'/}
                 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
                     <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
                 </div>
@@ -158,7 +158,7 @@
         <!-- basic scripts -->
 
         <!--[if !IE]> -->
-        <script src="__STATIC__/admin/ace1.4/assets/js/jquery-2.1.4.min.js"></script>
+        <script  type="text/javascript" src="__STATIC__/admin/ace1.4/assets/js/jquery-2.1.4.min.js"></script>
 
         <!-- <![endif]-->
 
@@ -176,23 +176,23 @@
         <!--[if lte IE 8]>
           <script src="__STATIC__/admin/ace1.4/assets/js/excanvas.min.js"></script>
         <![endif]-->
-
+    
 
         <!-- ace scripts -->
         <script src="__STATIC__/admin/ace1.4/assets/js/ace-elements.min.js"></script>
         <script src="__STATIC__/admin/ace1.4/assets/js/ace.min.js"></script>
 
         <!-- inline scripts related to this page -->
-        <link rel="stylesheet" href="__STATIC__/admin/artDialog/dialog.css" />
+        <link href="__STATIC__/admin/artDialog/dialog.css" rel="stylesheet" />
         <script src="__STATIC__/admin/artDialog/dialog.js"></script>
         <!--artDialog end-->
-
-
+        
+        
         <script>
                     var u = $(".active").parent('ul');
-
+                    
                     var uc = u.attr("class");//
-
+                   
                     if (uc == 'submenu') {
                        u.parent().attr("class", "open active");
                        if(u.parent().parent().attr('class')=='submenu'){

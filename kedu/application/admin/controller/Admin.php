@@ -20,26 +20,26 @@ class Admin extends Base {
         if ($group_id = input('group_id')) {
             $where['t2.group_id'] = $group_id;
         }
-
-        $lists = db('admin_user')->alias('t1')->field('t1.id,t1.user_name,t1.email,t1.last_login,t1.last_ip')
+        $lists = db('admin_user')->alias('t1')->field('t1.*')
                 ->where($where)
-                ->join(config('database.prefix').'admin_group t2', 't1.id=t2.admin_id', 'left')
+                ->join(config('database.prefix').'admin_group t2', 't1.id=t2.uid', 'left')
                 ->group('t1.id')
                 ->order('t1.id desc')
                 ->select();
-
-
+     
         foreach ($lists as $k => $v) {
             //取出组名
-            $tmp = db('admin_group')->field('group_name')->where('admin_id', 'in', $lists[$k]['id'])->select();
-                if ($tmp){
-                    $lists[$k]['groups']='';
-                      foreach ($tmp as $vv) {
-                          $lists[$k]['groups'] .= $vv['group_name'] . ',';
-                      }
-                }
-        }
+            $lists[$k]['groups'] = '';
+            $groups = Loader::model('Admin')->getUserGroups($v['id']);
+            if ($groups) {
+                $tmp = db('admin_group')->field('name')->where('id', 'in', $groups)->select();
 
+                foreach ($tmp as $vv) {
+                    $lists[$k]['groups'] .= $vv['name'] . ',';
+                }
+                $lists[$k]['groups'] = trim($lists[$k]['groups'], ',');
+            }
+        }
         $this->assign('lists', $lists);
         return $this->fetch();
     }

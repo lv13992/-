@@ -10,7 +10,7 @@
 
 namespace app\admin\controller;
 
-
+use app\admin\model\AdminUser;
 
 class Index extends Base{
     /**
@@ -19,4 +19,6 @@ class Index extends Base{
     public function index(){
         return $this->fetch();
     }
+    
+    
 }

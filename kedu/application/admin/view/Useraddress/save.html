@@ -1,0 +1,144 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+    <div class="page-header">
+        <h1>
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" role="form" action="save" method="post" name="myfrom" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">收货人姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="col-xs-10 col-sm-5" value="" name="consignee" id="name"/>
+                        <span style="color: red; line-height: 25px;display: inline-block;height: 25px; font-size: 15px; padding: 5px;">*</span>
+                        {if condition="isset($message['consignee'])"}
+                        <span style="color: red;">{$message['consignee']}</span>
+                        {/if}
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 收货人email </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="email"  class="col-xs-10 col-sm-5" />
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <span class="middle"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 配送地址 </label>
+
+                    <div class="col-sm-9">
+                        <select name="country" id="country">
+                            <option value="1">中国</option>
+                        </select>
+                        <select name="province" id="province" >
+                             <option value="0">请选择省</option>
+                            {volist name='province' id='val'}
+                             <option value="{$val.region_id}">{$val.region_name}</option>
+                            {/volist}
+                        </select>
+                        <select name="city" id="city" >
+                            <option value="0">请选择市区</option>
+                        </select>
+                        <select name="district" id="district">
+                            <option value="0">请选择区</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">详细地址</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="col-xs-10 col-sm-5" name="address" id="addr"/>
+                        <span style="color: red; line-height: 25px;display: inline-block;height: 25px; font-size: 15px; padding: 5px;">*</span>
+                        {if condition="isset($message['address'])"}
+                        <span style="color: red;">{$message['address']}</span>
+                        {/if}
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">邮编</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="col-xs-10 col-sm-5" name="zipcode" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="col-xs-10 col-sm-5" name="tel" id="tel"/>
+                        <span style="color: red; line-height: 25px;display: inline-block;height: 25px; font-size: 15px; padding: 5px;">*</span>
+                        {if condition="isset($message['tel'])"}
+                        <span style="color: red;">{$message['tel']}</span>
+                        {/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">手机</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="col-xs-10 col-sm-5" name="mobile" />
+                    </div>
+                </div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            提交
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/jquery-1.12.4.min.js"></script>
+<script>
+    $(function () {
+            $("#province").change(function () {
+                var data = {parent_id:$('#province').val()};
+                var url = '{:url(\'useraddress/city\')}';
+                $.post(url,data,function (r) {
+                    $('#city option:gt(0)').remove();
+                    for (var o in r){
+                        $('#city').append('<option value='+r[o].region_id+'>'+r[o].region_name+'</option>')
+                    }
+                },'json')
+            });
+            $("#city").change(function () {
+                var data = {parent_id:$('#city').val()};
+                var url = '{:url(\'useraddress/district\')}';
+                $.post(url,data,function (r) {
+                    $('#district option:gt(0)').remove();
+                    for (var o in r){
+                        $("#district").append('<option value='+r[o].region_id+'>'+r[o].region_name+'</option>')
+                    }
+                },'json')
+            });
+    })
+</script>
+<script>
+</script>
+{/block}

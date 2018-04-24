@@ -106,9 +106,16 @@ class User extends Base
      * @param  \think\Request  $request
      * @return \think\Response
      */
+    /**
+     * 显示修改页面
+     *
+     * @param  \think\Request  $request
+     * @return \think\Response
+     */
     public function save(){
 
         $model = model('user');
+
 
 
         $request = request();
@@ -131,7 +138,7 @@ class User extends Base
             $area= $rmodel->where ( array('region_type'=>3) )->select ();
             //查出用户表中所有等级
             $grade=Db::name('user_grade')->select();
-
+            $this->assign('data',$data);
             return $this->fetch('save', ['message' => Session::get('message'),'city'=>$city,'area'=>$area,'province'=>$province,'grade'=>$grade,'data'=>$data]);
 
         } elseif ($request->isPost()) {
@@ -142,10 +149,10 @@ class User extends Base
 
             $ch = $validate->batch()->check($data);
 
-            if (!$ch) {
-                $this->redirect('save', [], 302, ['message' => $validate->getError()]);
+            $error=$validate->getError();
+            if ($ch) {
+                $this->redirect('User/index',[],302,['message'=>$error]);
             }
-
             $data['salt']=rand(1255,6456);
 
             $data['password']=md5($data['password'].$data['salt']);

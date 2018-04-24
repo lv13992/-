@@ -3,8 +3,8 @@
 <div class="page-content">
     <div class="col-sm-6 pull-right">
         <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url("User/index")}'">
-            返回列表
-            <i class="icon-reply icon-only"></i>
+        返回列表
+        <i class="icon-reply icon-only"></i>
         </button>
     </div>
     <div class="row">
@@ -17,7 +17,7 @@
                     <div class="col-sm-9">
                         <select class="col-xs-10 col-sm-5" name="user_grade_id" />
                         {volist name='grade' id='vo'}
-                            <option value="{$vo.id}" {if condition="$vo.id eq $data.user_grade_id"}selected{/if}>{$vo.name}</option>
+                        <option value="{$vo.id}" {if condition="$vo.id eq $data.user_grade_id"}selected{/if}>{$vo.name}</option>
                         {/volist}
                         </select>
                     </div>
@@ -94,8 +94,8 @@
                     </div>
                 </div>
                 <div class="space-4"></div>
-                {if condition="isset($message['tel'])"}
-                <label for="input-tel" class="text-danger">{$message['tel']}</label>
+                {if condition="isset($message['email'])"}
+                <label for="input-tel" class="text-danger">{$message['email']}</label>
                 {/if}
 
 
@@ -162,26 +162,26 @@
 
 
                     <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right">详细地址</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="col-xs-10 col-sm-5" name="addr" value="{$data.addr}"/>
+                        <label class="col-sm-3 control-label no-padding-right">详细地址</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="col-xs-10 col-sm-5" name="addr" value="{$data.addr}"/>
+                        </div>
                     </div>
-                </div>
-                <div class="space-4"></div>
+                    <div class="space-4"></div>
 
-                <div class="clearfix form-actions">
-                    <div class="col-md-offset-3 col-md-9">
-                        <button class="btn btn-info" type="button" onclick="myfrom.submit()">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            提交
-                        </button>
-                        &nbsp; &nbsp; &nbsp;
-                        <button class="btn" type="reset">
-                            <i class="ace-icon fa fa-undo bigger-110"></i>
-                            重置
-                        </button>
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                提交
+                            </button>
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                重置
+                            </button>
+                        </div>
                     </div>
-                </div>
                 </div>
             </form>
             <!-- PAGE CONTENT ENDS -->

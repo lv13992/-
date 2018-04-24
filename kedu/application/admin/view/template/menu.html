@@ -1,9 +1,8 @@
-
 <ul class="nav nav-list">
     <li class="active">
-        <a href="#">
+        <a href="{:URL('Index/index')}">
             <i class="menu-icon fa fa-tachometer"></i>
-            <span class="menu-text"> Dashboard </span>
+            <span class="menu-text"> HOME PAGE </span>
         </a>
         <b class="arrow"></b>
     </li>
@@ -17,14 +16,14 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="{:url('Useraddress/index')}">
+                <a href="">
                     <i class="menu-icon fa fa-caret-right"></i>
                     管理员列表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="#">
+                <a href="{:url('admin/info')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     管理员分组
                 </a>
@@ -32,29 +31,28 @@
             </li>
 
             <li class="">
-                <a href="">
+                <a href="{:url('admin/info')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     权限管理
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="{:url('admin/info')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     组权限管理
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    操作日志
-                </a>
-                <b class="arrow"></b>
-            </li>
+            <a href="{:url('admin/info')}">
+                <i class="menu-icon fa fa-caret-right"></i>
+                操作日志
+            </a>
+            <b class="arrow"></b>
+        </li>
         </ul>
     </li>
-
     <li class="">
         <a href="#" class="dropdown-toggle">
             <i class="menu-icon fa fa-pencil-square-o"></i>
@@ -64,16 +62,9 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="{:url('Goods/index')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     商品列表
-                </a>
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    添加新商品
                 </a>
                 <b class="arrow"></b>
             </li>
@@ -92,28 +83,14 @@
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="{:url('Goodstype/index')}">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    商品类型
-                </a>
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    单品管理
-                </a>
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="">
+                <a href="{:url('Recycler/index')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     商品回收站
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="{:url('Attribute/index')}">
+                <a href="{:url('admin/info')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     商品属性
                 </a>
@@ -130,14 +107,14 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="{:url('admin/info')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     活动管理
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="{:url('admin/info')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     自定义活动
                 </a>
@@ -154,51 +131,30 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    订单管理
-                </a>
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="">
+                <a href="{:url('UserComment/index')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     购买评论
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    商品咨询
-                </a>
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="">
+                <a href="{:url('UserAccount/index')}">
                     <i class="menu-icon fa fa-caret-right"></i>
                     账户信息
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="{:url('UserFeedback/index')}">
                     <i class="menu-icon fa fa-caret-right"></i>
-                    退换货申请
+                    建议或投诉
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="{:url('UserAccount/recycle')}">
                     <i class="menu-icon fa fa-caret-right"></i>
-                    退款申请
-                </a>
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    建议一或投诉
+                    用户账单回收站
                 </a>
                 <b class="arrow"></b>
             </li>
@@ -213,35 +169,35 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="/admin/menu">
                     <i class="menu-icon fa fa-caret-right"></i>
                     订单列表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     订单审核
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     订单录入
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     发货列表单
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     退货单申请
                 </a>
@@ -258,56 +214,56 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="/admin/menu">
                     <i class="menu-icon fa fa-caret-right"></i>
                     商店设置
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     支付方式
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     配送方式
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     地区列表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     友情链接
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     广告管理
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     授权证书
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     自定义导航栏
                 </a>
@@ -331,7 +287,7 @@
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     品类管理
                 </a>
@@ -345,21 +301,21 @@
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     用户留言
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     用户浏览记录
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     用户购买记录
                 </a>
@@ -376,28 +332,28 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="/admin/menu">
                     <i class="menu-icon fa fa-caret-right"></i>
                     库存列表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     票据管理
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     出库管理
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     库存管理
                 </a>
@@ -414,35 +370,35 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="/admin/menu">
                     <i class="menu-icon fa fa-caret-right"></i>
                     搜索报表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     销售报表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     客服报表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     财务报表
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     仓储物流报表
                 </a>
@@ -459,21 +415,21 @@
         <b class="arrow"></b>
         <ul class="submenu">
             <li class="">
-                <a href="">
+                <a href="/admin/menu">
                     <i class="menu-icon fa fa-caret-right"></i>
                     供应商结算
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     配送结算
                 </a>
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="">
+                <a href="/admin/group">
                     <i class="menu-icon fa fa-caret-right"></i>
                     内部结算
                 </a>

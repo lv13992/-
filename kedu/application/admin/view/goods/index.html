@@ -1,0 +1,155 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <a title="添加" href="{:url('Goods/index')}">
+            <span class="btn btn-sm btn-primary col-sm-pull-10" onclick="javascript:window.location.href = ''">
+                刷新
+            </span>
+        </a>
+        <a title="添加" href="{:url('Goods/add')}">
+            <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = ''">
+                添加
+            </span>
+        </a>
+        <a title="选中删除" onclick="confirm('确认放入回收站？') ? $('#form-product').submit() : false;">
+            <span class="btn btn-xs btn-danger pull-right bigger-110">
+                选中删除
+            </span>
+        </a>
+    </div>
+    <div class="page-header">
+        <h1>
+            单品管理
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="well">
+        <form class="form-horizontal" role="form" action="{:url('Goods/search')}" method="post" name="myfrom" >
+            <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" for="input-name">商品名称</label>
+                    <input type="text" name="filter_name" value="" placeholder="商品名称" id="input-name" class="form-group-sm" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="input-name">货号</label>
+                    <input type="text" name="filter_sn" value="" placeholder="货号"  class="form-group-sm" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="">
+                      <label class="control-label" for="input-name">商品价格</label>
+                      <input type="number" name="filter_start"  style="width: 100px;" />
+                      <span>---</span>
+                      <input type="number" name="filter_end" style="width: 100px;"/>
+                </div>
+            </div>
+            <div class="col-sm-5">
+
+                <button type="button" class="btn btn-primary pull-right" onclick="myfrom.submit()">
+                    <i class="fa fa-search"></i> 搜索
+                    <span class="black">{$message |default=''}</span>
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+    <form action="{:url('goods/mutildel')}" method="post" enctype="multipart/form-data" id="form-product">
+        <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th class="detail-col">编号
+                                    <a href="{:URL('Goods/order',['status'=>1])}">
+                                        <i class='fa fa-angle-down'></i>
+                                    </a>
+                                    <a href="{:URL('Goods/order',['status'=>2])}">
+                                        <i class='fa fa-angle-up'></i>
+                                    </a>
+                            </th>
+                            <th>商品名称</th>
+                            <th>货号</th>
+                            <th class="hidden-480">价格</th>
+                            <th>精品</th>
+                            <th >热销</th>
+                            <th>新品</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" name="selected[]" value="{$vo.id}"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.goods_name}</td>
+                            <td><a href="">{$vo.goods_sn}</a></td>
+                            <td class="hidden-480">{$vo.shop_price}</td>
+                            <td>
+                                {if condition="$vo.is_best eq 1"}
+                                <a href="{:url('Goods/best',['status'=>'1','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">√</span></a>
+                                {elseif condition="$vo.is_best eq 0" /}
+                                <a href="{:url('Goods/best',['status'=>'0','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">×</span></a>
+                                {/if}
+                            <td>
+                                {if condition="$vo.is_hot eq 1"}
+                                <a href="{:url('Goods/hot',['status'=>'1','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">√</span></a>
+                                {elseif condition="$vo.is_hot eq 0" /}
+                                <a href="{:url('Goods/hot',['status'=>'0','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">×</span></a>
+                                {/if}
+                            </td>
+                            <td class="hidden-480">
+                                {if condition="$vo.is_new eq 1"}
+                                <a href="{:url('Goods/goodsNew',['status'=>'1','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">√</span></a>
+                                {elseif condition="$vo.is_new eq 0" /}
+                                <a href="{:url('Goods/goodsNew',['status'=>'0','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">×</span></a>
+                                {/if}
+                            </td>
+                            <td>
+                                <div class=" btn-group">
+                                    <a href="{:URL('Goods/edit',['id'=>$vo['id']])}">
+                                        <span class="btn btn-xs btn-info">
+                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div class=" btn-group">
+                                    <a href='javascript:void(0)' onclick="return alert_del('{:url(\"Goods/delete\",\"id=$vo[id]\")}', '确认要把『 id={$vo.id} 』的这条记录放入商品回收站吗？');"
+                                        <span class="btn btn-xs btn-danger pull-right bigger-110">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    </form>
+</div><!-- /.page-content -->
+{/block}

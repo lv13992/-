@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 
-use app\admin\validate\User;
+use app\admin\validate\Address;
 use think\Controller;
 use think\Db;
 use think\Session;
@@ -18,7 +18,7 @@ class Useraddress extends Controller{
             return $this->fetch('save', ['message'=>Session::get('message'),'province'=>$province]);
         }elseif (request()->isPost()){
             $data = request()->post();
-            $validate = new User();
+            $validate = new Address();
             $ch = $validate->batch()->check($data);
             if(!$ch){
                 $this->redirect('save',[],302,['message'=>$validate->getError()]);

@@ -1,0 +1,129 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+
+    <div class="page-header">
+        <h1>
+            单品管理
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                修改商品信息
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" role="form" action="" method="post" name="myfrom" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="hidden" name="id" value="{$list.id}">
+                    <label class="col-sm-3 control-label no-padding-right"> 商品名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="goods_name" placeholder="商品名称" class="col-xs-10 col-sm-5" value="{$list.goods_name}"/>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品货号 </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="goods_sn" placeholder="商品货号" class="col-xs-10 col-sm-5" value="{$list.goods_sn}"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品分类</label>
+                    <div class="col-sm-9">
+                        <select name="cat_id" class="col-xs-10 col-sm-5" >
+                            <option value="0">商品分类</option>
+                            {volist name="data" id="val"}
+                                <option value="{$val.cat_id}" >{$val.cat_name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品品牌</label>
+                    <div class="col-sm-9">
+                        <select name="brand_id" class="col-xs-10 col-sm-5" >
+                            <option value="0">商品品牌</option>
+                            {volist name="brand" id="val"}
+                                <option value="{$val.brand_id}">{$val.brand_name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品所属类型</label>
+                    <div class="col-sm-9">
+                        <select name="category_id" class="col-xs-10 col-sm-5" >
+                            <option value="0">商品所属类型</option>
+                            {volist name='category' id='val'}
+                            <option value="{$val.id}">{$val.cat_name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">本店售价 </label>
+                    <div class="col-sm-9">
+                        <input type="number"  value="{$list.shop_price}" name="shop_price" placeholder="本店售价" class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">市场售价 </label>
+                    <div class="col-sm-9">
+                        <input type="number" value="{$list.market_price}" name="market_price" placeholder="市场售价" class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">赠送消费积分数 </label>
+                    <div class="col-sm-9">
+                        <input type="number" name="give_integral" value="{$list.give_integral}"placeholder="赠送消费积分数" class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">促销价 </label>
+                    <div class="col-sm-9">
+                        <input type="number" name="promote_price" value="{$list.promote_price}"placeholder="促销价" class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">促销日期 </label>
+                    <div class="col-sm-9">
+                        <input type="date" name="promote_start_date" value="{$list.promote_start_date|date='Y-m-d',###}" placeholder="" class="col-xs-10 col-sm-5" />
+                        <input type="date" name="promote_end_date"  value="{$list.promote_end_date|date='Y-m-d',###}" placeholder="" class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品的简短描述 </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="goods_brief" value="{$list.goods_brief}" class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品详细描述 </label>
+                    <div class="col-sm-9">
+                        <textarea name="goods_desc" id="" cols="30" rows="10">{$list.goods_desc}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">上传商品图片 </label>
+                    <div class="col-sm-9">
+                        <input type="file" name="goods_img"  class="col-xs-10 col-sm-5" />
+                    </div>
+                </div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+{/block}

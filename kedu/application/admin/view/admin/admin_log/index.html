@@ -1,0 +1,61 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            管理员日志设置
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                展示信息
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th class="detail-col">序号</th>
+                            <th>操作时间</th>
+                            <th>操作者</th>
+                            <th>操作内容</th>
+                            <th>操作IP地址</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {volist name="lists" id="vo"}
+                        <tr>
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                            <td><a href="#">{$vo.id}</a></td>
+                            <td><a href="#">{$vo.log_time|date='Y-m-d H:i:s',###}</a></td>
+                            <td><a href="#">{$vo.admin_id}</a></td>
+                            <td><a href="#">{$vo.log_action}</a></td>
+                            <td><a href="#">{$vo.ip_address}</a></td>
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+{/block}

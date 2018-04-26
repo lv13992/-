@@ -1,0 +1,104 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <a title="选中删除" onclick="confirm('确认删除？') ? $('#form-product').submit() : false;">
+            <span class="btn btn-xs btn-danger pull-right bigger-110">
+                选中删除
+            </span>
+        </a>
+    </div>
+    <div class="page-header">
+        <h1>
+            商品回收站
+        </h1>
+    </div><!-- /.page-header -->
+    <form action="{:url('Recycler/mutildel')}" method="post" enctype="multipart/form-data" id="form-product">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table id="simple-table" class="table  table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"/>
+                                        <span class="lbl"></span>
+                                    </label>
+                                </th>
+                                <th class="detail-col">编号</th>
+                                <th>商品名称</th>
+                                <th>货号</th>
+                                <th class="hidden-480">价格</th>
+                                <th>精品</th>
+                                <th >热销</th>
+                                <th>新品</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" name="selected[]" value="{$vo.id}"/>
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.goods_name}</td>
+                                <td><a href="">{$vo.goods_sn}</a></td>
+                                <td class="hidden-480">{$vo.shop_price}</td>
+                                <td>
+                                    {if condition="$vo.is_best eq 1"}
+                                    <a href="{:url('Goods/hot',['status'=>'1','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">√</span></a>
+                                    {elseif condition="$vo.is_best eq 0" /}
+                                    <a href="{:url('Goods/hot',['status'=>'0','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">×</span></a>
+                                    {/if}
+                                <td>
+                                    {if condition="$vo.is_hot eq 1"}
+                                    <a href="{:url('Goods/hot',['status'=>'1','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">√</span></a>
+                                    {elseif condition="$vo.is_hot eq 0" /}
+                                    <a href="{:url('Goods/hot',['status'=>'0','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">×</span></a>
+                                    {/if}
+                                </td>
+                                <td class="hidden-480">
+                                    {if condition="$vo.is_new eq 1"}
+                                    <a href="{:url('Goods/goodsNew',['status'=>'1','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">√</span></a>
+                                    {elseif condition="$vo.is_new eq 0" /}
+                                    <a href="{:url('Goods/goodsNew',['status'=>'0','id'=>$vo['id']])}"><span class="green bigger-200 label-sale">×</span></a>
+                                    {/if}
+                                </td>
+                                <td>
+                                    <div class=" btn-group">
+                                        <a href="{:URL('Recycler/recover',['id'=>$vo['id']])}">
+                                        <span class="btn btn-xs btn-info">
+                                               还原
+                                        </span>
+                                        </a>
+                                    </div>
+                                    <div class=" btn-group">
+                                        <a href='javascript:void(0)' onclick="return alert_del('{:url(\"Recycler/delete\",\"id=$vo[id]\")}', '确认要删除『 id={$vo.id} 』这条记录吗？');"
+                                        <span class="btn btn-xs btn-danger pull-right bigger-110">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+
+                    </div><!-- /.span -->
+                </div><!-- /.row -->
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </form>
+</div><!-- /.page-content -->
+{/block}

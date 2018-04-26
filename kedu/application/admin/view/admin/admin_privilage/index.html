@@ -1,0 +1,74 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'save'">
+            添加
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+    <div class="page-header">
+        <h1>
+            组权限设置
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                展示信息
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="search-result">
+        <div class="panel-body">
+            <form action="" method="post">
+                <table align="center" width="80%"  >
+                    <tr>
+                        <td><input type="submit" formaction="{:url('index',['id'=>'1'])}" value="超级管理员" class="btn btn-block"></td>
+                        <td><input type="submit" formaction="{:url('index',['id'=>'2'])}" value="高级管理员" class="btn btn-block"></td>
+                        <td><input type="submit" formaction="{:url('index',['id'=>'3'])}" value="初级管理员" class="btn btn-block"></td>
+                        <td><input type="submit" formaction="{:url('index',['id'=>'4'])}" value="低级管理员" class="btn btn-block"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+                <div class="tab-content">
+                    <input type="hidden" id="group_id" value="{$a|default='1'}">
+                    <table id="simple-table" class="table table-bordered table-hover">
+                        {volist name="list" id="vo"}
+                        {if condition="$vo['parent_id'] eq 0"}
+                        <tr>
+                            <td style="width: 15%"><input type="checkbox" class="privilage" name="" value="{$vo.id}" {if condition="in_array($vo.id,$privilage)"}checked{/if}>{$vo.p_name}</td>
+                            {volist name="list" id="vi"}
+                                {if condition="$vi.parent_id eq $vo.id"}
+                                    <td>
+                                        <input type="checkbox" class="privilage" name="" value="{$vi.id}" {if condition="in_array($vi.id,$privilage)"}checked{/if}>{$vi.p_name}<br>
+                                            {volist name="list" id="va"}
+                                            {if condition="$va.parent_id eq $vi.id"}
+                                                &nbsp;&nbsp;<input type="checkbox" class="privilage" name="" value="{$va.id}" {if condition="in_array($va.id,$privilage)"}checked{/if}>{$va.p_name}<br>
+                                            {/if}
+                                        {/volist}
+                                    </td>
+                                {/if}
+                            {/volist}
+                        </tr>
+                        {/if}
+                        {/volist}
+                    </table>
+                </div>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script src="__STATIC__/admin/ace1.4/assets/js/jquery-2.1.4.min.js"></script>
+<script>
+    $(function () {
+        $(".privilage").click(function () {
+            var url = "{:url('admin_privilage/privilage')}";
+            var data = {id:$(this).val(),u_id:$('#group_id').val()};
+            $.post(url,data,function(r){
+                console.log(r);
+            },'json')
+        });
+    })
+</script>
+{/block}

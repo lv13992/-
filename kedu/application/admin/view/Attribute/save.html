@@ -1,0 +1,131 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+    <div class="page-header">
+        <h1>
+            <small>
+
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" role="form" action="save" method="post" name="myfrom" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 属性名称 </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="attr_name"  class="col-xs-10 col-sm-5" />
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <span class="middle"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">商品类型</label>
+                    <div class="col-sm-9">
+                        <select name="cat_id" >
+                            <option value="0">请选择</option>
+                            {volist name='cat' id='val'}
+                            <option value="{$val.cat_id}">{$val.cat_name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 能否进行检索 </label>
+
+                    <div class="col-sm-9">
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <input type="radio" name="attr_index"  value="0" checked/>
+                            <span class="middle">不需要检索</span>
+                            <input type="radio" name="attr_index"  value="1"/>
+                            <span class="middle">关键字检索</span>
+                            <input type="radio" name="attr_index"  value="2"/>
+                            <span class="middle">范围检索</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 相同属性值的商品是否关联 </label>
+
+                    <div class="col-sm-9">
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <input type="radio" name="is_linked"  value="0" checked/>
+                            <span class="middle">否</span>
+                            <input type="radio" name="is_linked"  value="1"/>
+                            <span class="middle">是</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 属性是否多选 </label>
+
+                    <div class="col-sm-9">
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <input type="radio" name="attr_type"  value="0" />
+                            <span class="middle">否</span>
+                            <input type="radio" name="attr_type"  value="1" checked/>
+                            <span class="middle">是</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 录入方式 </label>
+                    <div class="col-sm-9">
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <input type="radio" name="attr_input_type"  value="0" checked onclick="radioClicked(0)"/>
+                            <span class="middle">手动录入</span>
+                            <input type="radio" name="attr_input_type"  value="1" id="click" onclick="radioClicked(1)"/>
+                            <span class="middle">多行文本框</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right"> 可选值 </label>
+                    <div class="col-sm-9">
+                        <span class="help-inline col-xs-12 col-sm-7">
+                            <textarea name="attr_values" id="textara" cols="30" rows="3" disabled></textarea>
+                        </span>
+                    </div>
+                </div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" onclick="myfrom.submit()">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            提交
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<script type="text/javascript">
+    function radioClicked(n) {
+        document.forms['myfrom'].elements["attr_values"].disabled = n > 0 ? false : true;
+    }
+</script>
+{/block}

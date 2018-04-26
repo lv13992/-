@@ -1,0 +1,99 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            用户账单回收站
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="col-sm-6 pull-right">
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th class="detail-col">序号</th>
+                            <th>用户id</th>
+                            <th>管理员名</th>
+                            <th class="hidden-480">资金数目</th>
+                            <th>
+                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                记录插入时间
+                            </th>
+                            <th>
+                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                记录更新时间
+                            </th>
+                            <th class="hidden-480">管理员备注</th>
+                            <th class="hidden-480">用户备注</th>
+                            <th class="hidden-480">操作类型</th>
+                            <th class="hidden-480">支付渠道</th>
+                            <th class="hidden-480">付款状态</th>
+                            <th>管理员操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {volist name="list" id="vo"}
+                        <tr>
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                            <td>{$vo.id}</td>
+                            <td><a href="#">{$vo.user_id}</a></td>
+                            <td><a href="#">{$vo.admin_user}</a></td>
+                            <td class="hidden-480">{$vo.amount}</td>
+                            <td>{$vo.add_time | date = 'Y-m-d H:i:s',###}</td>
+                            <td>{$vo.paid_time | date = 'Y-m-d H:i:s',###}</td>
+                            <td>{$vo.admin_note}</td>
+                            <td>{$vo.user_note}</td>
+                            <td>{$vo.process_type===0?'预付款':'退款'}</td>
+                            <td>{$vo.payment}</td>
+                            <td>
+                                {$vo.is_paid===0?'未付':'已付'}
+                            </td>
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <a href='{:url("UserAccount/restore",["id"=>$vo.id])}'>
+                                            <span class="btn btn-xs btn-info">
+                                                <i class="ace-icon fa fa-recycle bigger-120">还原</i>
+                                            </span>
+                                    </a>
+
+                                    <a href='javascript:void(0)' onclick="return alert_del('{:url("del",["id"=>$vo.id])}', '若要删除『 id={$vo.id} 』将不可恢复！！？');">
+                                    <span class="btn btn-xs btn-danger">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                    </a>
+
+                                </div>
+                            </td>
+
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+{$page->render()}
+{/block}

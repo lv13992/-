@@ -1,0 +1,140 @@
+{extend name='template/layout'}
+{block name='content'}
+<div class="page-content">
+    <div class="col-sm-6 pull-right">
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'add'">
+            添加
+            <i class="icon-reply icon-only"></i>
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover" align="center">
+                        <thead>
+                        <tr>
+                            <th class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th class="detail-col">用户id</th>
+                            <th>用户组id</th>
+                            <th>用户名</th>
+                            <th>真实姓名</th>
+                            <th>身份证号</th>
+                            <th>电话</th>
+                            <th>邮箱</th>
+                            <th>性别</th>
+                            <th>用户积分</th>
+                            <th>注册时间</th>
+                            <th>密码问题</th>
+                            <th>登录次数</th>
+                            <th>
+                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                最后登录时间
+                            </th>
+                            <th>省</th>
+                            <th>城市</th>
+                            <th>地区</th>
+                            <th>详细地址</th>
+                            <th>管理员操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {volist name="lists" id="vo"}
+                        <tr>
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                            <td>{$vo.id}</td>
+                            <td><a href="#">{$vo.user_grade_id}</a></td>
+                            <td>{$vo.name}</td>
+                            <td class="hidden-480">{$vo.user_name}</td>
+                            <td>{$vo.id_number}</td>
+                            <td>{$vo.tel}</td>
+                            <td>{$vo.email}</td>
+                            <td>{$vo.sex}</td>
+                            <td>{$vo.point}</td>
+                            <td>{$vo.reg_time}</td>
+                            <td>{$vo.pw_question}</td>
+                            <td>{$vo.login_count}</td>
+                            <td>{$vo.last_login}</td>
+                            <td>{$vo.province}</td>
+                            <td>{$vo.city}</td>
+                            <td>{$vo.area}</td>
+                            <td>{$vo.addr}</td>
+
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+
+                                    <a href='{:url("save","id=$vo[id]")}'>
+                                    <span class="btn btn-xs btn-info">
+                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                            </span>
+                                    </a>
+                                    <a href='javascript:void(0)' onclick="return alert_del('{:url(\"delete\",\"id=$vo[id]\")}', '确认要删除『 id={$vo.id} 』这条记录吗？');"
+                                    <span class="btn btn-xs btn-danger">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                    </a>
+
+                                </div>
+
+                                <div class="hidden-md hidden-lg">
+                                    <div class="inline pos-rel">
+                                            <span class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </span>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            <div>
+                                                <li>
+                                                <a href='{:url("save","id=$vo[id]")}' class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                        <span class="green">
+                                                            <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                        </span>
+                                                </a>
+                                                </li>
+                                            </div>
+                                            <div>
+                                                <li>
+                                                    <a href='javascript:void(0)' onclick="return alert_del('{:url(\"delete\",\"id=$vo[id]\")}', '确认要删除『 id={$vo.id} 』这条记录吗？');" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                    <span class="red">
+                                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                        {/volist}
+                        </tbody>
+                    </table>
+
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<div class="row">
+    <div class="col-sm-6 text-left">
+        {$lists->render()}
+    </div>
+</div>
+{/block}

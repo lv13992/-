@@ -68,7 +68,7 @@ return [
     // 操作方法后缀
     'action_suffix'          => '',
     // 自动搜索控制器
-    'controller_auto_search' => true,
+    'controller_auto_search' => false,
 
     // +----------------------------------------------------------------------
     // | URL设置
@@ -99,7 +99,7 @@ return [
     // 域名根，如thinkphp.cn
     'url_domain_root'        => '',
     // 是否自动转换URL中的控制器和操作名
-    'url_convert'            => false,
+    'url_convert'            => true,
     // 默认的访问控制器层
     'url_controller_layer'   => 'controller',
     // 表单请求类型伪装变量
@@ -259,5 +259,4 @@ return [
         // 验证成功后是否重置
         'reset'    => true
     ],
-
 ];

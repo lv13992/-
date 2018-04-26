@@ -22,16 +22,16 @@ class Base extends Controller {
 
         parent::__construct($request);
 
-        if (!session('user_id')) {
+        if (!session('admin_id')) {
             $this->error('请登陆', 'login/index', '', 0);
         }
 
-        $this->user_id = session('user_id');
-        $this->user_name = session('user_name');
-        $this->salt = session('user_salt');
+        $this->user_id = session('admin_id');
+        $this->user_name = session('admin_name');
+        $this->salt = session('admin_salt');
 
         //权限检查
-//        if (!$this->_checkAuthor($this->user_id)) {
+//        if (!$this->_checkAuthor()) {
 //            $this->error('你无权限操作');
 //        }
 
@@ -42,49 +42,61 @@ class Base extends Controller {
     /**
      * 权限检查
      */
-    private function _checkAuthor($user_id) {
-        
-//        if (!$user_id) {
-//            return false;
-//        }
-//        if($user_id==1){
-//            return true;
-//        }
-//        $c = strtolower(request()->controller());
-//        $a = strtolower(request()->action());
-//
-//        if (preg_match('/^public_/', $a)) {
-//            return true;
-//        }
-//        if ($c == 'index' && $a == 'index') {
-//            return true;
-//        }
-//        $menu = model('Menu')->getMyMenu($user_id);
-//        foreach ($menu as $k => $v) {
-//            if (strtolower($v['c']) == $c && strtolower($v['a']) == $a) {
-//                return true;
-//            }
-//        }
-//        return false;
+    private function _checkAuthor() {
+        $path = [
+            'c'=>request()->controller(),
+            'a'=>request()->action()
+        ];
+        $lists = db('admin_group')->alias('t1')->field('privilage_id')
+            ->where(['t2.id'=>$this->user_id])
+            ->join(config('database.prefix').'admin t2', 't2.group_id=t1.id', 'left')
+            ->group('t1.id')
+            ->find();
+        $a = db('admin_privilage')->field('id')->where($path)->find();
+        $b = explode(',',$lists['privilage_id']);
+        if(!in_array($a['id'],$b)){
+            return false;
+        };
+        return true;
     }
 
     /**
      * 记录日志
      */
     private function _addLog() {
-//
-//        $data = array();
-//        $data['querystring'] = request()->query()?'?'.request()->query():'';
-//        $data['m'] = request()->module();
-//        $data['c'] = request()->controller();
-//        $data['a'] = request()->action();
-//        $data['userid'] = $this->user_id;
-//        $data['username'] = $this->user_name;
-//        $data['ip'] = ip2long(request()->ip());
-//        $arr = array('Index/index','Log/index','Menu/index');
-//        if (!in_array($data['c'].'/'.$data['a'], $arr)) {
-//            db('admin_log')->insert($data);
-//        }
+        $path = [
+            't2.c'=>request()->controller(),
+            't2.a'=>request()->action()
+        ];
+        if($path['t2.a']=='index'){
+            return true;
+        }
+        $a = db('admin_privilage')->alias('t1')->field('t1.p_name')
+            ->where($path)
+            ->join(config('database.prefix').'admin_privilage t2', 't2.parent_id=t1.id', 'left')
+            ->find();
+        if(request()->isPost()&&$path['t2.a']=='save'){
+            $id = input('id');
+            if(empty($id)){
+                $user_action = $a['p_name'].'添加';
+            }else{
+                $user_action = $a['p_name'].'修改';
+            }
+        }else{
+            if($path['t2.a']=='del'){
+                $user_action = $a['p_name'].'删除';
+            }else{
+                return true;
+            }
+        }
+        $data = [
+            'log_time'=>time(),
+            'admin_id'=>$this->user_id,
+            'log_action'=>$user_action,
+            'log_info'=>12,
+            'ip_address'=>request()->ip()
+        ];
+        db('admin_log')->insert($data);
     }
 
 }

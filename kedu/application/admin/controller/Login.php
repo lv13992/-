@@ -10,7 +10,7 @@
 
 namespace app\admin\controller;
 
-use app\admin\model\AdminUser;
+use app\admin\model\Admin as AdminModel;
 use think\Controller;
 use think\Db;
 use think\Loader;
@@ -25,7 +25,7 @@ class Login extends Controller {
 
 
         if (isset($_POST['dosubmit'])) {
-            $username = input('post.username');
+            $username = input('post.admin_name');
             $password = input('post.password');
 
             if (!$username) {
@@ -35,7 +35,7 @@ class Login extends Controller {
                 $this->error('密码不能为空');
             }
 
-            $info = db('admin_user')->field('id,user_name,password,salt')->where('user_name', $username)->find();
+            $info = db('admin')->field('id,admin_name,password,salt')->where('admin_name', $username)->find();
 
 
             if (!$info) {
@@ -45,44 +45,43 @@ class Login extends Controller {
             if (md5($password.$info['salt']) != $info['password']) {
                 $this->error('密码不正确');
             } else {
-                session('user_name', $info['user_name']);
-                session('user_id', $info['id']);
-                session('user_salt', $info['salt']);
+                session('admin_name', $info['admin_name']);
+                session('admin_id', $info['id']);
+                session('admin_salt', $info['salt']);
 
 
                 if (input('post.islogin')) {
-                    cookie('user_name', md5($info['user_name']));
-                    cookie('user_id', md5($info['id']));
+                    cookie('admin_name', md5($info['admin_name']));
+                    cookie('admin_id', md5($info['id']));
                 }
 
                 //修改最后登录信息
-                $model = new AdminUser();
+                $model = new AdminModel();
                 $data = [
-                    'last_login'=>time(),
-                    'last_ip'=>request()->ip(),
+                    'last_login_time'=>time(),
+                    'last_login_ip'=>request()->ip(),
                 ];
                 $mod = ['id'=>$info['id']];
                 $model->save($data,$mod);
                 $this->success('登入成功', 'index/index');
             }
         } else {
-            if (session('user_name')) {
+            if (session('admin_name')) {
                 $this->success('您已登入', 'index/index');
             }
 
-            if (cookie('user_name')) {
-                $username = md5(cookie('user_name'),'DECODE');
-                $info = db('admin')->field('id,user_name,password')->where('user_name', $username)->find();
+            if (cookie('admin_name')) {
+                $username = md5(cookie('admin_name'),'DECODE');
+                $info = db('admin')->field('id,admin_name,password')->where('admin_name', $username)->find();
                 if ($info) {
                     //记录
-                    session('user_name', $info['username']);
-                    session('user_id', $info['id']);
-                    Loader::model('Admin')->editInfo(1, $info['id']);
+                    session('admin_name', $info['admin_name']);
+                    session('admin_id', $info['id']);
+                    Loader::model('admin')->editInfo(1, $info['id']);
                     $this->success('登入成功', 'index/index');
                 }
             }
 
-            $this->view->engine->layout(false);
             return $this->fetch('login');
         }
     }
@@ -96,12 +95,12 @@ class Login extends Controller {
      * 登出
      */
     public function logout() {
-        session('user_name', null);
-        session('user_id', null);
-        session('user_salt', null);
-        cookie('user_name', null);
-        cookie('user_id', null);
-        cookie('user_salt', null);
+        session('admin_name', null);
+        session('admin_id', null);
+        session('admin_salt', null);
+        cookie('admin_name', null);
+        cookie('admin_id', null);
+        cookie('admin_salt', null);
         $this->success('退出成功', 'login/index');
     }
 

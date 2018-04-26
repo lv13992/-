@@ -1032,7 +1032,7 @@ artDialog.fn = artDialog.prototype = {
 			if (that.config.follow) {
 				that.follow(that.config.follow);
 			} else {
-
+				width = wrap.offsetWidth - width;
 				height = wrap.offsetHeight - height;
 				left = left - width / 2;
 				top = top - height / 2;

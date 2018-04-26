@@ -679,11 +679,7 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
                 $value = empty($value) ? new \stdClass() : json_decode($value);
                 break;
             case 'serialize':
-                try {
-                    $value = unserialize($value);
-                } catch (\Exception $e) {
-                    $value = null;
-                }
+                $value = unserialize($value);
                 break;
             default:
                 if (false !== strpos($type, '\\')) {
